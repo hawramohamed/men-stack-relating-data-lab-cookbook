@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= selectedUser.username %>'s Pantry</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1><%= selectedUser.username %>'s Pantry</h1>
+
+    <% if (selectedUser.pantry.length > 0) { %>
+    <ul>
+        <% selectedUser.pantry.forEach(item => { %>
+            <li>
+            <%= item.name %> — <%= item.quantity %> <%= item.unit %>
+        (expires on <%= item.expiration.toDateString() %>)
+        <% if (item.notes) { %> — <em><%= item.notes %></em><% } %>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>This pantry is currently empty.</p>
+<% } %>
+
+<a href="/users"> Back to Community</a>
+</body>
+</html>
