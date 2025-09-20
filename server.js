@@ -51,7 +51,10 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
+app.use(passUserToView);
 app.use('/auth', authController);
+app.use(isSignedIn);
+app.use('/users/:userId/foods', foodsController);
 app.use('/users/:userId/foods', foodsController);
 
 // PROTECTED
