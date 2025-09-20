@@ -66,6 +66,21 @@ router.get('/:itemId/edit', async (req, res) =>{
     }
 })
 
+//update form
+router.put('/:itemId', async (req, res) => {
+    try{
+        const currentUser = await User.findById(req.session.user._id);
+        const foodItem = currentUser.pantry.id(req.params.itemId);
+
+        foodItem.set(req.body);
+        await currentUser.save();
+        res.redirect(`/users/${currentUser._id}/foods`);
+    } catch (error){
+        console.log(error);
+        res.redirect('/');
+    }
+});
+
 
 
 module.exports = router;
