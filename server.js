@@ -12,6 +12,7 @@ const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
+const usersController = require('./controllers/users');
 
 // Controllers
 const authController = require('./controllers/auth.js');
@@ -54,7 +55,7 @@ app.get('/', (req, res) => {
 app.use(passUserToView);
 app.use('/auth', authController);
 app.use(isSignedIn);
-
+app.use('/users', usersController);
 
 // PROTECTED
 app.use('/users/:userId/foods', foodsController);
