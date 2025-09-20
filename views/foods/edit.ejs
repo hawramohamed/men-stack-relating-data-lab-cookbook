@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Pantry Item</h1>
+
+    <form action="/users/<%= user._id %>/foods/<%= item._id %>?_method=PUT" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="<%= item.name %>" required>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" value="<%= item.quantity %>" min="1" required>
+
+    <label for="unit">Unit:</label>
+    <select name="unit">
+        <option value="kg" <%= item.unit === 'kg' ? 'selected' : '' %>>kg</option>
+        <option value="g" <%= item.unit === 'g' ? 'selected' : '' %>>g</option>
+        <option value="lbs" <%= item.unit === 'lbs' ? 'selected' : '' %>>lbs</option>
+        <option value="oz" <%= item.unit === 'oz' ? 'selected' : '' %>>oz</option>
+    </select>
+
+    <label for="expiration">Expiration Date:</label>
+    <input type="date" name="expiration" value="<%= item.expiration.toISOString().split('T')[0] %>" required>
+
+    <label for="notes">Notes:</label>
+    <textarea name="notes"><%= item.notes %></textarea>
+
+  <button type="submit">Save Changes</button>
+</form>
+</body>
+</html>
